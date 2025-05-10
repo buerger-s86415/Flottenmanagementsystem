@@ -44,22 +44,22 @@ public class FmsApplication {
 
 			// === Tenant 1 ===
 			Tenant tenant1 = tenantRepo.save(new Tenant(1001));
-			FleetUser user1 = userRepo.save(new FleetUser(1, "Max Mustermann", tenant1));
+			FleetUser user1 = userRepo.save(new FleetUser(1, "Kevin Bürger", tenant1));
 			UGV ugv1 = ugvRepo.save(new UGV("UGV-A1", "Transporter", 3.5f, 85.0f, tenant1));
 			Route route1 = routeRepo.save(new Route("R-01", "Innenstadt", tenant1));
-			positionRepo.save(new Position(51.0504f, 13.7373f, route1));
-			positionRepo.save(new Position(51.0510f, 13.7400f, route1));
-			PositionExec exec1 = positionExecRepo.save(new PositionExec(51.0504f, 13.7373f, java.time.LocalDateTime.now()));
+			positionRepo.save(new Position(51, 13, route1));
+			positionRepo.save(new Position(10, 45, route1));
+			PositionExec exec1 = positionExecRepo.save(new PositionExec(51.010101010101f, 13.01010101010f, java.time.LocalDateTime.now()));
 			trackExecutionRepo.save(new TrackExecution(route1, user1, ugv1, exec1, tenant1));
 
 			// === Tenant 2 ===
 			Tenant tenant2 = tenantRepo.save(new Tenant(1002));
-			FleetUser user2 = userRepo.save(new FleetUser(2, "Erika Musterfrau", tenant2));
+			FleetUser user2 = userRepo.save(new FleetUser(2, "Benjamin Banse", tenant2));
 			UGV ugv2 = ugvRepo.save(new UGV("UGV-B1", "Versorger", 4.0f, 65.0f, tenant2));
 			Route route2 = routeRepo.save(new Route("R-02", "Campus", tenant2));
-			positionRepo.save(new Position(51.0350f, 13.7280f, route2));
-			positionRepo.save(new Position(51.0360f, 13.7300f, route2));
-			PositionExec exec2 = positionExecRepo.save(new PositionExec(51.0360f, 13.7300f, java.time.LocalDateTime.now()));
+			positionRepo.save(new Position(15, 15, route2));
+			positionRepo.save(new Position(26, 19, route2));
+			PositionExec exec2 = positionExecRepo.save(new PositionExec(51, 13, java.time.LocalDateTime.now()));
 			trackExecutionRepo.save(new TrackExecution(route2, user2, ugv2, exec2, tenant2));
 
 			// === Ausgabe ===
