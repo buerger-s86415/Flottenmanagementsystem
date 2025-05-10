@@ -1,9 +1,111 @@
-# Flottenmanagementsystem für UGVs – Praktikum I267
+# Flottenmanagementsystem für UGVs (Aufgabenstellung siehe unten)
+## Klassenbeschreibung (warum und was)
+## 📦 Datenmodellübersicht
 
-**Kurs:** Programmierung von Komponentenarchitekturen (I267)  
-**Betreuung:** Prof. Dr. Mario Neugebauer, Dipl.-Medieninf. Alexander Wülfing  
+### 🧩 1. `Tenant.java`  
+**= Mandant / Betreiber**
 
-## Projektziel
+- Repräsentiert z. B. ein Unternehmen, eine Abteilung oder Organisation
+- Jeder `Tenant` besitzt:
+  - eigene Nutzer (`FleetUser`)
+  - eigene Fahrzeuge (`UGV`)
+  - eigene Routen (`Route`)
+  - eigene Ausführungen (`TrackExecution`)
+
+> 💡 Zentrale Verwaltungs-Entität
+
+---
+
+### 👤 2. `FleetUser.java`  
+**= Nutzer, der Routen steuert oder plant**
+
+- Gehört genau zu einem `Tenant`
+- Hat:
+  - eine `userID` (interne ID)
+  - einen `userName` (Anzeigename)
+- Wird einer `TrackExecution` zugewiesen
+
+> 💡 Beispiel: Max Mustermann, der UGVs fährt
+
+---
+
+### 🚗 3. `UGV.java`  
+**= Unbemanntes Fahrzeug (Unmanned Ground Vehicle)**
+
+- Gehört zu einem `Tenant`
+- Hat:
+  - `ugvId` (z. B. „UGV-A1“)
+  - technische Eigenschaften (z. B. `maxSpeed`, `batteryLevel`)
+- Wird in `TrackExecution` eingesetzt
+
+> 💡 Ein konkretes, fahrbares System
+
+---
+
+### 🛣️ 4. `Route.java`  
+**= Ein Streckenplan mit Positionen**
+
+- Gehört zu einem `Tenant`
+- Besteht aus mehreren `Position`-Objekten (Wegpunkte)
+- Kann in mehreren `TrackExecution`-Instanzen verwendet werden
+
+> 💡 Z. B. Route durch das Werksgelände
+
+---
+
+### 📍 5. `Position.java`  
+**= Ein einzelner geplanter Punkt auf einer Route**
+
+- Enthält:
+  - `latitude` + `longitude`
+- Gehört genau zu einer `Route`
+
+> 💡 Zielpunkt auf einer Strecke
+
+---
+
+### 🛰️ 6. `PositionExec.java`  
+**= Eine tatsächlich angefahrene Position**
+
+- Wird in `TrackExecution` verwendet
+- Hat:
+  - Position (`latitude`, `longitude`)
+  - Zeitpunkt (`timestamp`)
+  - optional: Abweichung (z. B. `positionDeviation`)
+
+> 💡 Wird genutzt, um zu prüfen, wo das UGV wirklich war
+
+---
+
+### ▶️ 7. `TrackExecution.java`  
+**= Eine konkrete Ausführung einer Route**
+
+- Verbindet:
+  - einen `Tenant`
+  - eine `Route`
+  - ein `UGV`
+  - ein `FleetUser`
+  - eine `PositionExec`
+- Wird z. B. pro Einsatz dokumentiert
+
+> 💡 Quasi ein Logbucheintrag
+
+---
+
+### 🔗 Beziehungen im Überblick:
+
+```text
+Tenant
+ ├──> FleetUser
+ ├──> UGV
+ ├──> Route ───> Position
+ └──> TrackExecution ───> UGV
+                        └──> FleetUser
+                        └──> Route
+                        └──> PositionExec
+```
+_____________________________________________________________________________________
+## Projektziel (Aufgabenstellung)
 
 Entwicklung eines Flottenmanagementsystems (FMS) für UGVs (Unmanned Guided Vehicles).  
 Das System soll ein skalierbares, sicheres Backend bieten, das zentrale Funktionen zur Fahrzeugverfolgung, Routenplanung, Aufgabenverteilung, Kommunikation und Diagnose bereitstellt.
