@@ -1,5 +1,7 @@
 package com.htwdresden.buerger_banse.fms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,22 +11,27 @@ public class TrackExecution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private FleetUser fleetUser;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ugv_id")
     private UGV ugv;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "position_exec_id")
     private PositionExec positionExec;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tenant_id")
     private Tenant tenant;

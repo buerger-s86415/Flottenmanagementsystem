@@ -1,5 +1,7 @@
 package com.htwdresden.buerger_banse.fms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class FleetUser {
     private int userID;
     private String userName;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tenant_id")
     private Tenant tenant;

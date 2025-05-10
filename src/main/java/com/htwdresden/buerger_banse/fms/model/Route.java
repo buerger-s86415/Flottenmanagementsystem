@@ -2,6 +2,8 @@ package com.htwdresden.buerger_banse.fms.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,12 +23,15 @@ public class Route {
     private String shortName;
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrackExecution> trackExecutions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Position> positions;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tenant_id") // Fremdschlüssel in DB
     private Tenant tenant;

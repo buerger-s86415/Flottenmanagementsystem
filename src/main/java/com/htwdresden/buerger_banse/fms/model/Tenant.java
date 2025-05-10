@@ -2,6 +2,8 @@ package com.htwdresden.buerger_banse.fms.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,12 +17,20 @@ public class Tenant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int tenantID;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Route> routes;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FleetUser> fleetUsers;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrackExecution> trackExecutions;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UGV> ugvs;
 
