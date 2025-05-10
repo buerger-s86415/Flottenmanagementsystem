@@ -51,4 +51,37 @@ public class Tenant {
     public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    public List<FleetUser> getFleetUsers() {
+        return fleetUsers;
+    }
+
+    public void setFleetUsers(List<FleetUser> fleetUsers) {
+        this.fleetUsers = fleetUsers;
+    }
+
+    public List<TrackExecution> getTrackExecutions() {
+        return trackExecutions;
+    }
+
+    public void setTrackExecutions(List<TrackExecution> trackExecutions) {
+        this.trackExecutions = trackExecutions;
+    }
+
+    public List<UGV> getUgvs() {
+        return ugvs;
+    }
+
+    public void setUgvs(List<UGV> ugvs) {
+        this.ugvs = ugvs;
+    }
+    
 }

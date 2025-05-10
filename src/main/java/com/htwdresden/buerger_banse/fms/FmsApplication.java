@@ -41,75 +41,66 @@ public class FmsApplication {
 			TrackExecutionRepository trackExecutionRepo,
 			PositionExecRepository positionExecRepo) {
 		return args -> {
-			// Tenant anlegen
-			Tenant tenant = new Tenant(1001);
-			tenantRepo.save(tenant);
 
-			// UGVs anlegen
-			UGV ugv = new UGV("UGV-A1", "Transporter", 3.5f, 85.0f, tenant);
-			ugvRepo.save(ugv);
+			// === Tenant 1 ===
+			Tenant tenant1 = tenantRepo.save(new Tenant(1001));
+			FleetUser user1 = userRepo.save(new FleetUser(1, "Max Mustermann", tenant1));
+			UGV ugv1 = ugvRepo.save(new UGV("UGV-A1", "Transporter", 3.5f, 85.0f, tenant1));
+			Route route1 = routeRepo.save(new Route("R-01", "Innenstadt", tenant1));
+			positionRepo.save(new Position(51.0504f, 13.7373f, route1));
+			positionRepo.save(new Position(51.0510f, 13.7400f, route1));
+			PositionExec exec1 = positionExecRepo.save(new PositionExec(51.0504f, 13.7373f, java.time.LocalDateTime.now()));
+			trackExecutionRepo.save(new TrackExecution(route1, user1, ugv1, exec1, tenant1));
 
-			// FleetUser anlegen
-			FleetUser user = new FleetUser(1, "Max Mustermann", tenant);
-			userRepo.save(user);
+			// === Tenant 2 ===
+			Tenant tenant2 = tenantRepo.save(new Tenant(1002));
+			FleetUser user2 = userRepo.save(new FleetUser(2, "Erika Musterfrau", tenant2));
+			UGV ugv2 = ugvRepo.save(new UGV("UGV-B1", "Versorger", 4.0f, 65.0f, tenant2));
+			Route route2 = routeRepo.save(new Route("R-02", "Campus", tenant2));
+			positionRepo.save(new Position(51.0350f, 13.7280f, route2));
+			positionRepo.save(new Position(51.0360f, 13.7300f, route2));
+			PositionExec exec2 = positionExecRepo.save(new PositionExec(51.0360f, 13.7300f, java.time.LocalDateTime.now()));
+			trackExecutionRepo.save(new TrackExecution(route2, user2, ugv2, exec2, tenant2));
 
-			// Route anlegen
-			Route route = new Route("R-01", "Teststrecke", tenant);
-			routeRepo.save(route);
-
-			// Positionen für Route anlegen
-			Position pos1 = new Position(51.0504f, 13.7373f, route);
-			Position pos2 = new Position(51.0510f, 13.7400f, route);
-			positionRepo.save(pos1);
-			positionRepo.save(pos2);
-
-			// PositionExec anlegen
-			PositionExec execPos = new PositionExec(51.0504f, 13.7373f, java.time.LocalDateTime.now());
-			positionExecRepo.save(execPos);
-
-			// TrackExecution anlegen
-			TrackExecution exec = new TrackExecution(route, user, ugv, execPos, tenant);
-			trackExecutionRepo.save(exec);
-
-			// Ausgabe aller Objekte
-			log.info("==== TENANTS ====");
+			// === Ausgabe ===
+			log.info("==== ALL TENANTS ====");
 			tenantRepo.findAll().forEach(t ->
-				log.info("Tenant ID: " + t.getTenantID() + " (DB-ID: " + t.getId() + ")")
+				log.info("Tenant: " + t.getTenantID() + " (DB-ID: " + t.getId() + ")")
 			);
 
-			log.info("==== FLEET USERS ====");
-			userRepo.findAll().forEach(u ->
-				log.info("User: " + u.getUserName() + " (userID=" + u.getUserID() + ", Tenant=" + u.getTenant().getTenantID() + ")")
-			);
-
-			log.info("==== UGVs ====");
+			log.info("==== ALL UGVs ====");
 			ugvRepo.findAll().forEach(u ->
-				log.info("UGV: " + u.getUgvId() + " (" + u.getDescription() + "), Akku: " + u.getBatteryLevel() + "%, Tenant: " + u.getTenant().getTenantID())
+				log.info("UGV: " + u.getUgvId() + " (" + u.getDescription() + "), Akku: " + u.getBatteryLevel() + "%")
 			);
 
-			log.info("==== ROUTES ====");
+			log.info("==== ALL USERS ====");
+			userRepo.findAll().forEach(u ->
+				log.info("User: " + u.getUserName() + ", userID=" + u.getUserID())
+			);
+
+			log.info("==== ALL ROUTES ====");
 			routeRepo.findAll().forEach(r ->
-				log.info("Route: " + r.getShortName() + " - " + r.getDescription() + ", Tenant: " + r.getTenant().getTenantID())
+				log.info("Route: " + r.getShortName() + " - " + r.getDescription())
 			);
 
-			log.info("==== POSITIONS ====");
+			log.info("==== ALL POSITIONS ====");
 			positionRepo.findAll().forEach(p ->
-				log.info("Position: " + p.getLatitude() + ", " + p.getLongitude() + ", Route: " + p.getRoute().getShortName())
+				log.info("Position: " + p.getLatitude() + ", " + p.getLongitude() + " (Route: " + p.getRoute().getShortName() + ")")
 			);
 
-			log.info("==== POSITION EXECUTIONS ====");
+			log.info("==== ALL EXECUTED POSITIONS ====");
 			positionExecRepo.findAll().forEach(p ->
-				log.info("Exec Position: " + p.getLatitude() + ", " + p.getLongitude() + ", Zeit: " + p.getTimestamp())
+				log.info("Executed Position: " + p.getLatitude() + ", " + p.getLongitude() + " at " + p.getTimestamp())
 			);
 
-			log.info("==== TRACK EXECUTIONS ====");
-			trackExecutionRepo.findAll().forEach(e -> {
-				log.info("TrackExec: Route=" + e.getRoute().getShortName() +
-						 ", UGV=" + e.getUgv().getUgvId() +
-						 ", User=" + e.getFleetUser().getUserName() +
-						 ", Pos=" + e.getPositionExec().getLatitude() + "/" + e.getPositionExec().getLongitude() +
-						 ", Tenant=" + e.getTenant().getTenantID());
-			});
+			log.info("==== ALL TRACK EXECUTIONS ====");
+			trackExecutionRepo.findAll().forEach(e ->
+				log.info("Track: Tenant=" + e.getTenant().getTenantID() +
+						", Route=" + e.getRoute().getShortName() +
+						", UGV=" + e.getUgv().getUgvId() +
+						", User=" + e.getFleetUser().getUserName() +
+						", Position=" + e.getPositionExec().getLatitude() + "/" + e.getPositionExec().getLongitude())
+			);
 		};
 	}
 }
