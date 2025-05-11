@@ -40,6 +40,112 @@
 | TrackExecution   | PUT     | /api/trackexecutions/{id}     | Eintrag aktualisieren     |
 | TrackExecution   | DELETE  | /api/trackexecutions/{id}     | Eintrag löschen           |
 
+## REST API Anleitung
+
+# 📡 REST API Anleitung
+
+Dieses Projekt bietet eine voll funktionsfähige REST-API zur Verwaltung von UGV-Flotten. Die API basiert auf Spring Boot und verwendet standardisierte HTTP-Methoden.
+
+---
+
+## ✅ Voraussetzungen
+
+* Java 17 oder 21+
+* Maven
+* Optional: Postman (oder curl) zum Testen
+* Projekt starten mit:
+
+```bash
+./mvnw spring-boot:run
+```
+
+---
+
+## 📂 Basis-URL (bei lokalem Start)
+
+```
+http://localhost:8080
+```
+
+---
+
+## 🚀 Beispiel-Endpunkte (für UGV)
+
+| Methode  | Pfad             | Beschreibung                  |
+| -------- | ---------------- | ----------------------------- |
+| `GET`    | `/api/ugvs`      | Alle UGVs abrufen             |
+| `GET`    | `/api/ugvs/{id}` | Einzelnen UGV abrufen         |
+| `POST`   | `/api/ugvs`      | Neuen UGV speichern           |
+| `PUT`    | `/api/ugvs/{id}` | Bestehenden UGV aktualisieren |
+| `DELETE` | `/api/ugvs/{id}` | UGV löschen                   |
+
+---
+
+## 🧪 Beispiel: Neuen UGV erstellen (mit Postman oder curl)
+
+### 🔗 URL
+
+```http
+POST http://localhost:8080/api/ugvs
+```
+
+### 📦 JSON-Body
+
+```json
+{
+  "ugvId": "UGV-X9",
+  "description": "Wartungseinheit",
+  "maxSpeed": 3.5,
+  "batteryLevel": 90.0
+}
+```
+
+---
+
+## 🔄 Gleiches Prinzip für alle anderen Entitäten
+
+Ersetze einfach `ugvs` durch:
+
+* `tenants`
+* `fleetusers`
+* `routes`
+* `positions`
+* `positionexecs`
+* `trackexecutions`
+
+Beispiel:
+
+```http
+GET http://localhost:8080/api/fleetusers
+```
+
+---
+
+## 🛠 Fehlerbehandlung
+
+* Wenn ein Objekt mit gegebener ID nicht existiert, gibt die API `404 Not Found` zurück.
+* JSON muss gültig und vollständig sein – sonst `400 Bad Request`
+
+---
+
+## 🧰 Entwicklerhinweis
+
+Die REST-Controller befinden sich im Paket:
+
+```text
+com.htwdresden.buerger_banse.fms.controller
+```
+
+Die Repositories unter:
+
+```text
+com.htwdresden.buerger_banse.fms.repository
+```
+
+---
+
+Viel Spaß beim Testen und Erweitern deiner REST-API! 💡
+
 
 ## Klassenbeschreibung (warum und was)
 ## 📦 Datenmodellübersicht
