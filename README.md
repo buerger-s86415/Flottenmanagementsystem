@@ -1,4 +1,46 @@
 # Flottenmanagementsystem für UGVs (Aufgabenstellung siehe unten)
+
+## REST-API Endpunktübersicht
+
+| Entität         | Methode | URL                           | Aktion                   |
+|------------------|---------|-------------------------------|---------------------------|
+| UGV              | GET     | /api/ugvs                     | Alle anzeigen             |
+| UGV              | GET     | /api/ugvs/{id}                | Eintrag per ID            |
+| UGV              | POST    | /api/ugvs                     | Neuen Eintrag erstellen   |
+| UGV              | PUT     | /api/ugvs/{id}                | Eintrag aktualisieren     |
+| UGV              | DELETE  | /api/ugvs/{id}                | Eintrag löschen           |
+| Tenant           | GET     | /api/tenants                  | Alle anzeigen             |
+| Tenant           | GET     | /api/tenants/{id}             | Eintrag per ID            |
+| Tenant           | POST    | /api/tenants                  | Neuen Eintrag erstellen   |
+| Tenant           | PUT     | /api/tenants/{id}             | Eintrag aktualisieren     |
+| Tenant           | DELETE  | /api/tenants/{id}             | Eintrag löschen           |
+| FleetUser        | GET     | /api/fleetusers               | Alle anzeigen             |
+| FleetUser        | GET     | /api/fleetusers/{id}          | Eintrag per ID            |
+| FleetUser        | POST    | /api/fleetusers               | Neuen Eintrag erstellen   |
+| FleetUser        | PUT     | /api/fleetusers/{id}          | Eintrag aktualisieren     |
+| FleetUser        | DELETE  | /api/fleetusers/{id}          | Eintrag löschen           |
+| Route            | GET     | /api/routes                   | Alle anzeigen             |
+| Route            | GET     | /api/routes/{id}              | Eintrag per ID            |
+| Route            | POST    | /api/routes                   | Neuen Eintrag erstellen   |
+| Route            | PUT     | /api/routes/{id}              | Eintrag aktualisieren     |
+| Route            | DELETE  | /api/routes/{id}              | Eintrag löschen           |
+| Position         | GET     | /api/positions                | Alle anzeigen             |
+| Position         | GET     | /api/positions/{id}           | Eintrag per ID            |
+| Position         | POST    | /api/positions                | Neuen Eintrag erstellen   |
+| Position         | PUT     | /api/positions/{id}           | Eintrag aktualisieren     |
+| Position         | DELETE  | /api/positions/{id}           | Eintrag löschen           |
+| PositionExec     | GET     | /api/positionexecs            | Alle anzeigen             |
+| PositionExec     | GET     | /api/positionexecs/{id}       | Eintrag per ID            |
+| PositionExec     | POST    | /api/positionexecs            | Neuen Eintrag erstellen   |
+| PositionExec     | PUT     | /api/positionexecs/{id}       | Eintrag aktualisieren     |
+| PositionExec     | DELETE  | /api/positionexecs/{id}       | Eintrag löschen           |
+| TrackExecution   | GET     | /api/trackexecutions          | Alle anzeigen             |
+| TrackExecution   | GET     | /api/trackexecutions/{id}     | Eintrag per ID            |
+| TrackExecution   | POST    | /api/trackexecutions          | Neuen Eintrag erstellen   |
+| TrackExecution   | PUT     | /api/trackexecutions/{id}     | Eintrag aktualisieren     |
+| TrackExecution   | DELETE  | /api/trackexecutions/{id}     | Eintrag löschen           |
+
+
 ## Klassenbeschreibung (warum und was)
 ## 📦 Datenmodellübersicht
 
