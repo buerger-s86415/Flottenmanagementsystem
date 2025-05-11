@@ -1,11 +1,19 @@
 package com.htwdresden.buerger_banse.fms.controller;
 
-import com.htwdresden.buerger_banse.fms.model.UGV;
-import com.htwdresden.buerger_banse.fms.repository.UGVRepository;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.htwdresden.buerger_banse.fms.model.UGV;
+import com.htwdresden.buerger_banse.fms.repository.UGVRepository;
 
 @RestController
 @RequestMapping("/api/ugvs")
@@ -17,7 +25,7 @@ public class UGVController {
         this.ugvRepo = ugvRepo;
     }
 
-    // 📥 Alle UGVs abfragen
+    // Alle UGVs abfragen
     @GetMapping
     public List<UGV> getAllUGVs() {
         List<UGV> list = new ArrayList<>();
@@ -26,20 +34,20 @@ public class UGVController {
     }
 
 
-    // 🔍 Einzelnen UGV per ID abfragen
+    // Einzelnen UGV per ID abfragen
     @GetMapping("/{id}")
     public UGV getUGVById(@PathVariable Long id) {
         return ugvRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("UGV mit ID " + id + " nicht gefunden"));
     }
 
-    // ➕ Neuen UGV anlegen
+    // Neuen UGV anlegen
     @PostMapping
     public UGV createUGV(@RequestBody UGV ugv) {
         return ugvRepo.save(ugv);
     }
 
-    // 📝 UGV aktualisieren
+    // UGV aktualisieren
     @PutMapping("/{id}")
     public UGV updateUGV(@PathVariable Long id, @RequestBody UGV updatedUGV) {
         UGV ugv = ugvRepo.findById(id).orElseThrow();
@@ -50,7 +58,7 @@ public class UGVController {
         return ugvRepo.save(ugv);
     }
 
-    // 🗑️ UGV löschen
+    // UGV löschen
     @DeleteMapping("/{id}")
     public void deleteUGV(@PathVariable Long id) {
         ugvRepo.deleteById(id);

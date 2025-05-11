@@ -1,5 +1,8 @@
 package com.htwdresden.buerger_banse.fms;
 
+//http://localhost:8080/api/ugvs
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -46,6 +49,7 @@ public class FmsApplication {
 			Tenant tenant1 = tenantRepo.save(new Tenant(1001));
 			FleetUser user1 = userRepo.save(new FleetUser(1, "Kevin Bürger", tenant1));
 			UGV ugv1 = ugvRepo.save(new UGV("UGV-A1", "Transporter", 3.5f, 85.0f, tenant1));
+			UGV ugv2 = ugvRepo.save(new UGV("UGV-A2", "Transporter2", 3.5f, 34.0f, tenant1));
 			Route route1 = routeRepo.save(new Route("R-01", "Innenstadt", tenant1));
 			positionRepo.save(new Position(51, 13, route1));
 			positionRepo.save(new Position(10, 45, route1));
@@ -55,7 +59,7 @@ public class FmsApplication {
 			// === Tenant 2 ===
 			Tenant tenant2 = tenantRepo.save(new Tenant(1002));
 			FleetUser user2 = userRepo.save(new FleetUser(2, "Benjamin Banse", tenant2));
-			UGV ugv2 = ugvRepo.save(new UGV("UGV-B1", "Versorger", 4.0f, 65.0f, tenant2));
+			UGV ugv3 = ugvRepo.save(new UGV("UGV-B1", "Versorger", 4.0f, 65.0f, tenant2));
 			Route route2 = routeRepo.save(new Route("R-02", "Campus", tenant2));
 			positionRepo.save(new Position(15, 15, route2));
 			positionRepo.save(new Position(26, 19, route2));
