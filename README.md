@@ -40,15 +40,13 @@
 | TrackExecution   | PUT     | /api/trackexecutions/{id}     | Eintrag aktualisieren     |
 | TrackExecution   | DELETE  | /api/trackexecutions/{id}     | Eintrag löschen           |
 
-## REST API Anleitung
-
-# 📡 REST API Anleitung
+# REST API Anleitung
 
 Dieses Projekt bietet eine voll funktionsfähige REST-API zur Verwaltung von UGV-Flotten. Die API basiert auf Spring Boot und verwendet standardisierte HTTP-Methoden.
 
 ---
 
-## ✅ Voraussetzungen
+##  Voraussetzungen
 
 * Java 17 oder 21+
 * Maven
@@ -61,7 +59,7 @@ Dieses Projekt bietet eine voll funktionsfähige REST-API zur Verwaltung von UGV
 
 ---
 
-## 📂 Basis-URL (bei lokalem Start)
+## Basis-URL (bei lokalem Start)
 
 ```
 http://localhost:8080
@@ -69,7 +67,7 @@ http://localhost:8080
 
 ---
 
-## 🚀 Beispiel-Endpunkte (für UGV)
+## Beispiel-Endpunkte (für UGV)
 
 | Methode  | Pfad             | Beschreibung                  |
 | -------- | ---------------- | ----------------------------- |
@@ -81,15 +79,15 @@ http://localhost:8080
 
 ---
 
-## 🧪 Beispiel: Neuen UGV erstellen (mit Postman oder curl)
+## Beispiel: Neuen UGV erstellen (mit Postman oder curl)
 
-### 🔗 URL
+### URL
 
 ```http
 POST http://localhost:8080/api/ugvs
 ```
 
-### 📦 JSON-Body
+### JSON-Body
 
 ```json
 {
@@ -102,7 +100,7 @@ POST http://localhost:8080/api/ugvs
 
 ---
 
-## 🔄 Gleiches Prinzip für alle anderen Entitäten
+## Gleiches Prinzip für alle anderen Entitäten
 
 Ersetze einfach `ugvs` durch:
 
@@ -121,14 +119,14 @@ GET http://localhost:8080/api/fleetusers
 
 ---
 
-## 🛠 Fehlerbehandlung
+## Fehlerbehandlung
 
 * Wenn ein Objekt mit gegebener ID nicht existiert, gibt die API `404 Not Found` zurück.
 * JSON muss gültig und vollständig sein – sonst `400 Bad Request`
 
 ---
 
-## 🧰 Entwicklerhinweis
+## Entwicklerhinweis
 
 Die REST-Controller befinden sich im Paket:
 
@@ -143,9 +141,6 @@ com.htwdresden.buerger_banse.fms.repository
 ```
 
 ---
-
-Viel Spaß beim Testen und Erweitern deiner REST-API! 💡
-
 
 ## Klassenbeschreibung (warum und was)
 ## 📦 Datenmodellübersicht
