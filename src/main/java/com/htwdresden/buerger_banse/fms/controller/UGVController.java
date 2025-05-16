@@ -12,17 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.htwdresden.buerger_banse.fms.model.TrackExecution;
 import com.htwdresden.buerger_banse.fms.model.UGV;
+import com.htwdresden.buerger_banse.fms.repository.TrackExecutionRepository;
 import com.htwdresden.buerger_banse.fms.repository.UGVRepository;
+
 
 @RestController
 @RequestMapping("/api/ugvs")
 public class UGVController {
 
     private final UGVRepository ugvRepo;
+    private final TrackExecutionRepository trackRepo;
 
-    public UGVController(UGVRepository ugvRepo) {
+    public UGVController(UGVRepository ugvRepo, TrackExecutionRepository trackRepo) {
         this.ugvRepo = ugvRepo;
+        this.trackRepo = trackRepo;
     }
 
     // Alle UGVs abfragen
@@ -61,6 +66,12 @@ public class UGVController {
     // UGV löschen
     @DeleteMapping("/{id}")
     public void deleteUGV(@PathVariable Long id) {
-        ugvRepo.deleteById(id);
+        List<TrackExecution> executions = trackRepo.findByUgv_Id(id);
+
+        if (!executions.isEmpty()) {
+            throw new RuntimeException("UGV mit ID " + id + " kann nicht gelöscht werden, da es in TrackExecutions verwendet wird.");
+        }
+
+        ugvRepo.deleteById(id);    
     }
 }
